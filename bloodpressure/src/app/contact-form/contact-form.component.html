@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm.value)">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input required ngModel name="firstname" (change)="log(firstname)" #firstname="ngModel" id="firstName" type="text" placeholder="First Name" class="form-control">
+            <div class="alert alert-danger" *ngIf="firstname.touched && !firstname.valid">First Name is required.</div>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input required ngModel name="lastname" (change)="log(lastname)" #lastname="ngModel" id="lastName" type="text" placeholder="Last Name" class="form-control">
+            <div class="alert alert-danger" *ngIf="lastname.touched && !lastname.valid">Last Name is required.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="highBp">High Blood Pressure</label>
+            <input ngModel name="highblood" (change)="log(highblood)" #highblood="ngModel" id="highBp" type="text" class="form-control" placeholder="Enter BP">
+        </div>
+        <div class="form-group">
+            <label for="lowBp">Low Blood Pressure</label>
+            <input ngModel name="lowblood" (change)="log(lowblood)" #lowblood="ngModel" id="lowBp" type="text" class="form-control" placeholder="Enter BP">
+        </div>
+        <div class="form-group">
+            <label for="dday">Date of Observation</label>
+            <input ngModel name="create_date" (change)="log(create_date)" #create_date="ngModel" id="dday" required type="date" class="form-control">
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-primary" (click)="contactForm.reset()">Reset</button>
+
+    </form>
+
+</div>
+
+<br/><br/>
+
+<div class="container-fluid">
+    <table class="table table-responsive table-striped">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>High BP</th>
+            <th>Low BP</th>
+            <th>Created Date</th>
+        </tr>
+        <tr *ngFor="let item of bpData;">
+            <td>{{item.firstname}}</td>
+            <td>{{item.lastname}}</td>
+            <td>{{item.highblood}}</td>
+            <td>{{item.lowblood}}</td>
+            <td>{{item.create_date | date: 'dd/MM/yyyy'}}</td>
+        </tr>
+    </table>
+</div>
